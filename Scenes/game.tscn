@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvgdax1itxsb0"]
+
+[ext_resource type="Texture2D" uid="uid://co6cu8kmelkl4" path="res://Assets/1_Terrains_48x48.png" id="1_ebmjs"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Mundo" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Mundo"]
+position = Vector2(768, 552)
+texture = ExtResource("1_ebmjs")
+
+[node name="Casa_1" type="Node2D" parent="Mundo"]
+
+[node name="Casa_2" type="Node2D" parent="Mundo"]
+
+[node name="Props" type="Node2D" parent="Mundo"]
+
+[node name="Boxes_collectable" type="Node2D" parent="."]
+
+[node name="Box_x" type="Node2D" parent="Boxes_collectable"]
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(407, 242)
+rotation = -2.7454028
+
+[node name="Boxes_projectile" type="Node2D" parent="."]
+
+[node name="Box_x" type="Node2D" parent="Boxes_projectile"]
+
+[node name="Enemys" type="Node2D" parent="."]
+position = Vector2(407, 242)
+rotation = -2.7454028
+
+[node name="Enemy_x" type="Node2D" parent="Enemys"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Hint_to_play" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Box_Resource" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Box_Type_1" type="Control" parent="UI/Box_Resource"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
