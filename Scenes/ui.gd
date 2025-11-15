@@ -1,7 +1,7 @@
-extends Control
+extends CanvasLayer
 
-@onready var label_common_boxes = $CommonBoxesLabel
-@onready var label_explosive_boxes = $ExplosiveBoxesLabel
+@onready var label_common_boxes = $Box_Resource/Box_Comum_Count
+@onready var label_explosive_boxes = $Box_Resource/Box_Explosive_Count
 
 func _ready() -> void:
 	pass # Replace with function body.
