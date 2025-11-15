@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cvgdax1itxsb0"]
+[gd_scene load_steps=18 format=4 uid="uid://cvgdax1itxsb0"]
 
 [ext_resource type="Script" uid="uid://ca55fwmvpn2mo" path="res://Scripts/camera.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://co6cu8kmelkl4" path="res://Assets/1_Terrains_48x48.png" id="1_ebmjs"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://c6an4efwsuyxb" path="res://Scripts/ui.gd" id="6_i6g32"]
 [ext_resource type="PackedScene" uid="uid://s276dtn2fpgs" path="res://Scenes/box_comum.tscn" id="6_o5yvi"]
 [ext_resource type="Texture2D" uid="uid://fgaafsrjkxo5" path="res://Assets/SelectesBox.png" id="9_h4fw4"]
+[ext_resource type="Script" uid="uid://c01jrnyqrj3ob" path="res://Scenes/score_zone.gd" id="9_rku1e"]
+[ext_resource type="Texture2D" uid="uid://b5jrr5f0cd585" path="res://Assets/Casa_destino_48x48-383x1749-484x420.png" id="10_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://boxm7tm1wd4qn" path="res://Assets/Casa_origem-192x352-189x221.png" id="10_rku1e"]
 [ext_resource type="Script" uid="uid://cmyvabg54a6hg" path="res://Scenes/casa_origem.gd" id="11_o5yvi"]
 
@@ -766,9 +768,6 @@ y_sort_enabled = true
 [node name="Casa_1" type="Node2D" parent="Mundo"]
 visible = false
 
-[node name="Casa_2" type="Node2D" parent="Mundo"]
-visible = false
-
 [node name="Props" type="Node2D" parent="Mundo"]
 visible = false
 
@@ -791,6 +790,7 @@ position = Vector2(256, 64)
 script = ExtResource("11_o5yvi")
 box_explosive_scene = ExtResource("5_ldgsr")
 box_common_scene = ExtResource("6_o5yvi")
+spawn_interval = 0.5
 
 [node name="CasaOrigem" type="Sprite2D" parent="Mundo/BoxSpawner"]
 texture = ExtResource("10_rku1e")
@@ -811,33 +811,31 @@ position = Vector2(0, 40.000004)
 scale = Vector2(9.148019, 6.817382)
 shape = SubResource("RectangleShape2D_o5yvi")
 
-[node name="Boxes_collectable" type="Node2D" parent="."]
-
-[node name="Box_x" type="Node2D" parent="Boxes_collectable"]
-
-[node name="Box_explosive" parent="Boxes_collectable" instance=ExtResource("5_ldgsr")]
-position = Vector2(296, 344)
-
-[node name="Box_comum" parent="Boxes_collectable" instance=ExtResource("6_o5yvi")]
-position = Vector2(232, 344)
-
-[node name="Boxes_projectile" type="Node2D" parent="."]
-
-[node name="Box_x" type="Node2D" parent="Boxes_projectile"]
-
-[node name="Box_explosive_proj" type="Sprite2D" parent="Boxes_projectile"]
-modulate = Color(1, 0, 0, 1)
+[node name="ScoreZone" type="Node2D" parent="Mundo"]
 y_sort_enabled = true
-position = Vector2(472, 256)
-texture = ExtResource("2_qxrlw")
+script = ExtResource("9_rku1e")
 
-[node name="Box_comum_proj" type="Sprite2D" parent="Boxes_projectile"]
-y_sort_enabled = true
-position = Vector2(472, 192)
-texture = ExtResource("2_qxrlw")
+[node name="CasaDestino" type="Sprite2D" parent="Mundo/ScoreZone"]
+position = Vector2(-88, 432)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("10_rfjv2")
 
-[node name="Boxes_projectile2" type="Node2D" parent="."]
-y_sort_enabled = true
+[node name="TopLeft" type="Marker2D" parent="Mundo/ScoreZone"]
+position = Vector2(-264, 328)
+
+[node name="BottomRight" type="Marker2D" parent="Mundo/ScoreZone"]
+position = Vector2(112, 632)
+
+[node name="TickTimer" type="Timer" parent="Mundo/ScoreZone"]
+
+[node name="Area2D2" type="StaticBody2D" parent="Mundo/ScoreZone"]
+position = Vector2(-88, 480)
+scale = Vector2(1.8096684, 0.9098414)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mundo/ScoreZone/Area2D2"]
+position = Vector2(0, 40.000004)
+scale = Vector2(9.148019, 6.817382)
+shape = SubResource("RectangleShape2D_o5yvi")
 
 [node name="Enemys" type="Node2D" parent="."]
 position = Vector2(407, 242)
@@ -898,6 +896,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_qxrlw")
 
 [node name="Box_Selected_Box" type="Sprite2D" parent="UI/Box_Resource"]
+visible = false
 position = Vector2(-47, 0)
 texture = ExtResource("9_h4fw4")
 
@@ -923,4 +922,22 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="LabelScore" type="Label" parent="UI/Score"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 48.0
+offset_right = 49.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0.18400002, 1, 0.04000002, 1)
+text = "$$$"
+
+[node name="CountScore" type="Label" parent="UI/Score"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 88.0
+offset_bottom = 71.0
+text = "0000"
+
 [connection signal="timeout" from="Mundo/BoxSpawner/SpawnTimer" to="Mundo/BoxSpawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Mundo/ScoreZone/TickTimer" to="Mundo/ScoreZone" method="_on_tick_timer_timeout"]

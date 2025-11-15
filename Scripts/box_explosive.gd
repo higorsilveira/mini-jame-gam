@@ -12,5 +12,6 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	GameController.addExplosiveBoxes(1)
-	queue_free()
+	if body.name == "Player":
+		GameController.addExplosiveBoxes(1)
+		queue_free()

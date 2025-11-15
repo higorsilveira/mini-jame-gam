@@ -10,11 +10,13 @@ extends Node2D
 @onready var top_left: Marker2D = $TopLeft
 @onready var bottom_right: Marker2D = $BottomRight
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var area_2d: StaticBody2D = $Area2D
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	area_2d.add_to_group("world")
 	rng.randomize()
 	
 	spawn_timer.wait_time = spawn_interval

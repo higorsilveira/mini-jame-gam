@@ -6,6 +6,9 @@ extends CharacterBody2D
 
 var last_direction: Vector2 = Vector2.DOWN
 
+func _ready() -> void:
+	add_to_group("player")
+
 func _physics_process(delta: float) -> void:
 	var input_vector := Vector2.ZERO
 
@@ -13,6 +16,17 @@ func _physics_process(delta: float) -> void:
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
 	input_vector = input_vector.normalized()
+	
+	if Input.is_action_just_pressed("switch_box"):
+		GameController.switchBox()
+	
+	if Input.is_action_just_pressed("throw_box"):
+		var dir: Vector2 = last_direction
+		if dir == Vector2.ZERO:
+			dir = Vector2.DOWN
+		var mouse_pos = get_global_mouse_position()
+		GameController.throw_selected_box(global_position, mouse_pos, dir)
+		
 
 	velocity = input_vector * speed
 	move_and_slide()
