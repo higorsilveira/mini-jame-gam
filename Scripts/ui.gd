@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	if selectedbox == 1:
 		box_selected_comum.visible = false
 		box_selected_box.visible = true
-	if GameController.getScore() >= 100:
+	if GameController.gameFinished :
 		game_over_ui.visible = true
 
 

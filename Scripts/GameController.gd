@@ -4,6 +4,7 @@ var qtdCommonBoxesHeld: int = 0
 var qtdExplosiveBoxesHeld: int = 0
 var score: int = 0
 var selected_box: int = 0  # 0 = comum, 1 = explosiva
+var gameFinished := false
 
 # Carrega as cenas dos projéteis em tempo de compilação
 const COMMON_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxCommonProjectile.tscn")
@@ -14,6 +15,7 @@ func restartGame() -> void:
 	qtdExplosiveBoxesHeld = 0
 	score = 0
 	selected_box = 0
+	gameFinished = false
 	
 func getQtdCommonBoxesHeld() -> int:
 	return qtdCommonBoxesHeld
@@ -35,6 +37,8 @@ func subCommonBoxes() -> void:
 
 
 func switchBox() -> int:
+	if gameFinished:
+		return selected_box
 	selected_box += 1
 	if selected_box > 1:
 		selected_box = 0
@@ -45,6 +49,8 @@ func getSelectedBox() -> int:
 
 
 func updateScore(box_type: int) -> void:
+	if gameFinished:
+		return 
 	if box_type == 0 and qtdCommonBoxesHeld > 0:
 		score += 10
 		subCommonBoxes()
@@ -56,6 +62,9 @@ func getScore() -> int:
 	return score
 
 func throw_selected_box(from_position: Vector2, to_position: Vector2, direction1: Vector2) -> void:
+	if gameFinished:
+		return
+		
 	var directionMouse = from_position.direction_to(to_position)
 	if directionMouse == Vector2.ZERO:
 		return
