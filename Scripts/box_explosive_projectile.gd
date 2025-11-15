@@ -27,7 +27,6 @@ func _on_Body_entered(body: Node2D) -> void:
 		return
 
 
-	print("Entrou em contato com algo")
 	if body.is_in_group("world") or body.is_in_group("wall") or body.name == "Limits":
 		_explode()
 

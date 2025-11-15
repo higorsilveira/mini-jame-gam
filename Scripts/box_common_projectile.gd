@@ -17,14 +17,12 @@ func _physics_process(delta: float) -> void:
 func _on_Body_entered(body: Node2D) -> void:
 	# Se bater em inimigo
 	if body.is_in_group("enemy"):
+		print("atingiu um inimigod")
 		if body.has_method("take_hit"):
 			body.call("take_hit", 1)
 		queue_free()
 		return
 	
-	# Se bater em parede ou qualquer outra coisa sólida:
-	# (garante que não destrói ao encostar em coisas decorativas, se quiser)
-	print("Entrou em contato com algo")
 	print(body.name)
 	if body.is_in_group("world") or body.is_in_group("wall") or body.name == "Limits":
 		queue_free()

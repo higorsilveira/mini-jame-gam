@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 200.0
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprit2D
+@onready var marker_2d: Marker2D = $Marker2D
 
 var last_direction: Vector2 = Vector2.DOWN
 
@@ -25,8 +26,7 @@ func _physics_process(delta: float) -> void:
 		if dir == Vector2.ZERO:
 			dir = Vector2.DOWN
 		var mouse_pos = get_global_mouse_position()
-		GameController.throw_selected_box(global_position, mouse_pos, dir)
-		
+		GameController.throw_selected_box(marker_2d.global_position, mouse_pos, dir)
 
 	velocity = input_vector * speed
 	move_and_slide()

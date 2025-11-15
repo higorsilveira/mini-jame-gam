@@ -1,12 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://6q1763nstifg"]
 
 [ext_resource type="Texture2D" uid="uid://beaffg7lavihy" path="res://Assets/Box_comum-48x48.png" id="1_o2mx0"]
-[ext_resource type="Script" uid="uid://bs2wy5w51t7rh" path="res://Scenes/box_explosive_projectile.gd" id="1_yay3w"]
+[ext_resource type="Script" uid="uid://bs2wy5w51t7rh" path="res://Scripts/box_explosive_projectile.gd" id="1_yay3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aaokk"]
 size = Vector2(14.012112, 46.82322)
 
 [node name="Area2D" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
 script = ExtResource("1_yay3w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

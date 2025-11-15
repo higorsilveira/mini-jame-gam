@@ -4,17 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://co6cu8kmelkl4" path="res://Assets/1_Terrains_48x48.png" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://beaffg7lavihy" path="res://Assets/Box_comum-48x48.png" id="2_qxrlw"]
 [ext_resource type="Texture2D" uid="uid://bvhm5vw7l8sfo" path="res://Assets/2_Fences_48x48.png" id="3_wowpa"]
-[ext_resource type="PackedScene" uid="uid://ccea0g3tj143g" path="res://Scenes/player.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://d1w6rcxewha0l" path="res://Scenes/player.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://dkr2q4bs5wcqo" path="res://Scenes/box_explosive.tscn" id="5_ldgsr"]
 [ext_resource type="Script" uid="uid://c6an4efwsuyxb" path="res://Scripts/ui.gd" id="6_i6g32"]
 [ext_resource type="PackedScene" uid="uid://s276dtn2fpgs" path="res://Scenes/box_comum.tscn" id="6_o5yvi"]
 [ext_resource type="Texture2D" uid="uid://fgaafsrjkxo5" path="res://Assets/SelectesBox.png" id="9_h4fw4"]
-[ext_resource type="Script" path="res://Scenes/score_zone.gd" id="9_rku1e"]
+[ext_resource type="Script" uid="uid://c01jrnyqrj3ob" path="res://Scripts/score_zone.gd" id="9_rku1e"]
 [ext_resource type="Texture2D" uid="uid://b5jrr5f0cd585" path="res://Assets/Casa_destino_48x48-383x1749-484x420.png" id="10_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://boxm7tm1wd4qn" path="res://Assets/Casa_origem-192x352-189x221.png" id="10_rku1e"]
-[ext_resource type="PackedScene" uid="uid://2fo2opex74h4" path="res://enemy_1.tscn" id="11_1phco"]
-[ext_resource type="Script" uid="uid://ckn6aufdq22q0" path="res://Scenes/enemys.gd" id="11_nb51f"]
-[ext_resource type="Script" uid="uid://cmyvabg54a6hg" path="res://Scenes/casa_origem.gd" id="11_o5yvi"]
+[ext_resource type="PackedScene" uid="uid://2fo2opex74h4" path="res://Scenes/enemy_1.tscn" id="11_1phco"]
+[ext_resource type="Script" uid="uid://ckn6aufdq22q0" path="res://Scripts/enemys.gd" id="11_nb51f"]
+[ext_resource type="Script" uid="uid://cmyvabg54a6hg" path="res://Scripts/casa_origem.gd" id="11_o5yvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dryh"]
 texture = ExtResource("1_ebmjs")
@@ -750,7 +750,7 @@ texture_region_size = Vector2i(48, 48)
 
 [sub_resource type="TileSet" id="TileSet_wowpa"]
 tile_size = Vector2i(48, 48)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_3dryh")
 sources/1 = SubResource("TileSetAtlasSource_i6g32")
 
@@ -808,6 +808,7 @@ position = Vector2(88, 192)
 autostart = true
 
 [node name="Area2D" type="StaticBody2D" parent="Mundo/BoxSpawner"]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mundo/BoxSpawner/Area2D"]
 position = Vector2(0, 40.000004)
@@ -834,6 +835,7 @@ position = Vector2(112, 632)
 [node name="Area2D2" type="StaticBody2D" parent="Mundo/ScoreZone"]
 position = Vector2(-88, 480)
 scale = Vector2(1.8096684, 0.9098414)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mundo/ScoreZone/Area2D2"]
 position = Vector2(0, 40.000004)

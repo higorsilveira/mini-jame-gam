@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://ccea0g3tj143g"]
+[gd_scene load_steps=53 format=3 uid="uid://d1w6rcxewha0l"]
 
 [ext_resource type="Script" uid="uid://3snges5rspl6" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cqusfxku7iaa5" path="res://Assets/Farmer_1_48x48.png" id="2_6t5aa"]
@@ -387,6 +387,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 position = Vector2(0, -40)
+collision_mask = 2
 script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprit2D" type="AnimatedSprite2D" parent="."]
@@ -398,3 +399,6 @@ autoplay = "idle_down"
 position = Vector2(0, 40)
 scale = Vector2(1.2191069, 1.2191069)
 shape = SubResource("CircleShape2D_wowpa")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 32)
