@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://s276dtn2fpgs"]
+
+[ext_resource type="Texture2D" uid="uid://beaffg7lavihy" path="res://Assets/Box_comum-48x48.png" id="1_rqhpf"]
+[ext_resource type="Script" uid="uid://biqdu5ikcq6u8" path="res://Scripts/box_comum.gd" id="2_dyc5j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
+size = Vector2(45, 47)
+
+[node name="Box_comum" type="Sprite2D"]
+y_sort_enabled = true
+texture = ExtResource("1_rqhpf")
+script = ExtResource("2_dyc5j")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-123, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(123, -28)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
