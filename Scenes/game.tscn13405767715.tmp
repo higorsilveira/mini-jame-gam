@@ -996,4 +996,3 @@ text = "RESTART"
 
 [connection signal="timeout" from="Mundo/BoxSpawner/SpawnTimer" to="Mundo/BoxSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Mundo/ScoreZone/TickTimer" to="Mundo/ScoreZone" method="_on_tick_timer_timeout"]
-[connection signal="pressed" from="UI/GameOverUI/ColorRect/Restart" to="UI" method="_on_restart_pressed"]

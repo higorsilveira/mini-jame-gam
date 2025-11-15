@@ -3,13 +3,18 @@ extends Node
 var qtdCommonBoxesHeld: int = 0
 var qtdExplosiveBoxesHeld: int = 0
 var score: int = 0
-var selected_box: int = 1  # 0 = comum, 1 = explosiva
+var selected_box: int = 0  # 0 = comum, 1 = explosiva
 
 # Carrega as cenas dos projéteis em tempo de compilação
 const COMMON_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxCommonProjectile.tscn")
 const EXPLOSIVE_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxExplosiveProjectile.tscn")
 
-
+func restartGame() -> void:
+	qtdCommonBoxesHeld = 0
+	qtdExplosiveBoxesHeld = 0
+	score = 0
+	selected_box = 0
+	
 func getQtdCommonBoxesHeld() -> int:
 	return qtdCommonBoxesHeld
 
