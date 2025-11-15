@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="mini_jame_gam"
+run/main_scene="uid://cvgdax1itxsb0"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameController="*res://Scripts/GameController.gd"
 
 [display]
 

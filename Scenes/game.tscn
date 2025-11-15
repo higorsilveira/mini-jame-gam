@@ -1,10 +1,19 @@
-[gd_scene load_steps=56 format=3 uid="uid://cvgdax1itxsb0"]
+[gd_scene load_steps=61 format=3 uid="uid://cvgdax1itxsb0"]
 
 [ext_resource type="Script" uid="uid://ca55fwmvpn2mo" path="res://Scripts/camera.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://co6cu8kmelkl4" path="res://Assets/1_Terrains_48x48.png" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://beaffg7lavihy" path="res://Assets/Box_comum-48x48.png" id="2_qxrlw"]
 [ext_resource type="Script" uid="uid://3snges5rspl6" path="res://Scripts/player.gd" id="2_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://cqusfxku7iaa5" path="res://Assets/Farmer_1_48x48.png" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://baa0v6fji0gkv" path="res://Scenes/box_explosive.gd" id="4_h4fw4"]
+[ext_resource type="Script" uid="uid://biqdu5ikcq6u8" path="res://Scenes/box_comum.gd" id="4_v158k"]
+[ext_resource type="Script" uid="uid://c6an4efwsuyxb" path="res://Scenes/ui.gd" id="6_i6g32"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldgsr"]
+size = Vector2(42, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
+size = Vector2(45, 47)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wowpa"]
 atlas = ExtResource("4_3dryh")
@@ -407,12 +416,52 @@ texture = ExtResource("1_ebmjs")
 
 [node name="Boxes_collectable" type="Node2D" parent="."]
 
-[node name="Box_x" type="Node2D" parent="Boxes_collectable"]
+[node name="Box_explosive" type="Sprite2D" parent="Boxes_collectable"]
+modulate = Color(1, 0, 0, 1)
+y_sort_enabled = true
+position = Vector2(152, 218)
+texture = ExtResource("2_qxrlw")
+script = ExtResource("4_h4fw4")
+
+[node name="Area2D" type="Area2D" parent="Boxes_collectable/Box_explosive"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boxes_collectable/Box_explosive/Area2D"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_ldgsr")
+
+[node name="Box_comum" type="Sprite2D" parent="Boxes_collectable"]
+y_sort_enabled = true
+position = Vector2(65, 204)
+texture = ExtResource("2_qxrlw")
+script = ExtResource("4_v158k")
+
+[node name="Area2D" type="Area2D" parent="Boxes_collectable/Box_comum"]
+position = Vector2(-123, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boxes_collectable/Box_comum/Area2D"]
+position = Vector2(123, -28)
+shape = SubResource("RectangleShape2D_i6g32")
+
+[node name="Boxes_projectile" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Box_explosive_proj" type="Sprite2D" parent="Boxes_projectile"]
+modulate = Color(1, 0, 0, 1)
+y_sort_enabled = true
+position = Vector2(248, 297)
+texture = ExtResource("2_qxrlw")
+
+[node name="Box_comum_proj" type="Sprite2D" parent="Boxes_projectile"]
+y_sort_enabled = true
+position = Vector2(-27, 228)
+texture = ExtResource("2_qxrlw")
 
 [node name="Player" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("2_wrm1d")
 
 [node name="AnimatedSprit2D" type="AnimatedSprite2D" parent="Player"]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_wr3wg")
 animation = &"idle_right"
 autoplay = "idle_down"
@@ -420,17 +469,6 @@ autoplay = "idle_down"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 scale = Vector2(6.3283195, 6.3283195)
 shape = SubResource("CircleShape2D_3dryh")
-
-[node name="Boxes_projectile" type="Node2D" parent="."]
-
-[node name="Box_explosive" type="Sprite2D" parent="Boxes_projectile"]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(152, 218)
-texture = ExtResource("2_qxrlw")
-
-[node name="Box_comum" type="Sprite2D" parent="Boxes_projectile"]
-position = Vector2(82, 116)
-texture = ExtResource("2_qxrlw")
 
 [node name="Enemys" type="Node2D" parent="."]
 position = Vector2(407, 242)
@@ -443,6 +481,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("6_i6g32")
 
 [node name="Hint_to_play" type="Control" parent="UI"]
 anchors_preset = 0
@@ -468,3 +507,31 @@ offset_bottom = 40.0
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="CommonBoxesLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = -311.0
+offset_top = -88.0
+offset_right = -271.0
+offset_bottom = -65.0
+
+[node name="BoxComum48x48" type="Sprite2D" parent="UI"]
+position = Vector2(-327.5, -76)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qxrlw")
+
+[node name="ExplosiveBoxesLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = -312.0
+offset_top = -57.0
+offset_right = -272.0
+offset_bottom = -34.0
+
+[node name="BoxExplosive" type="Sprite2D" parent="UI"]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-327, -45)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qxrlw")
+
+[connection signal="body_entered" from="Boxes_collectable/Box_explosive/Area2D" to="Boxes_collectable/Box_explosive" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Boxes_collectable/Box_comum/Area2D" to="Boxes_collectable/Box_comum" method="_on_area_2d_body_entered"]
