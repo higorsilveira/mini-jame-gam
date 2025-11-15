@@ -1,0 +1,48 @@
+extends CharacterBody2D
+
+@export var speed: float = 200.0
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprit2D
+
+var last_direction: Vector2 = Vector2.DOWN
+
+func _physics_process(delta: float) -> void:
+	var input_vector := Vector2.ZERO
+
+	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+
+	input_vector = input_vector.normalized()
+
+	velocity = input_vector * speed
+	move_and_slide()
+
+	_update_animation(input_vector)
+
+func _update_animation(input_vector: Vector2) -> void:
+	if input_vector.length() > 0.0:
+		if abs(input_vector.x) > abs(input_vector.y):
+			if input_vector.x > 0.0:
+				anim.play("move_right")
+				last_direction = Vector2.RIGHT
+			else:
+				anim.play("move_left")
+				last_direction = Vector2.LEFT
+		else:
+			if input_vector.y > 0.0:
+				anim.play("move_down")
+				last_direction = Vector2.DOWN
+			else:
+				anim.play("move_up")
+				last_direction = Vector2.UP
+
+	else:
+		match last_direction:
+			Vector2.RIGHT:
+				anim.play("idle_right")
+			Vector2.LEFT:
+				anim.play("idle_left")
+			Vector2.UP:
+				anim.play("idle_up")
+			Vector2.DOWN:
+				anim.play("idle_down")
