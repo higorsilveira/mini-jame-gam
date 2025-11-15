@@ -1,14 +1,26 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
+#@export var player: PackedScene
+@export var speed: float = 5000.0
+@export var max_hitpoints: float = 1000.0
+@onready var player = get_tree().get_nodes_in_group("player")[0]
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+var active: bool = false
+var hitpoints = max_hitpoints
+	
 func _physics_process(delta: float) -> void:
-	var input_vector := Vector2(2, 0)
-	velocity = input_vector * speed
+	if not active:
+		return
+
+	var direction = position.direction_to(player.position)
+	velocity = direction * speed * delta
 	move_and_slide()
+	
+func take_hit(damage: int) -> void:
+	print("enemy take hit")
+	hitpoints -= damage
+	if hitpoints <= 0:
+		die()
+	
+func die() -> void:
+	active = false

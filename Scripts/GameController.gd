@@ -57,11 +57,9 @@ func getScore() -> int:
 
 func throw_selected_box(from_position: Vector2, to_position: Vector2, direction1: Vector2) -> void:
 	var directionMouse = from_position.direction_to(to_position)
-	print("Chegou aqui")
 	if directionMouse == Vector2.ZERO:
 		return
 	
-	print("Chegou aqui")
 	# Garante que tem munição
 	if selected_box == 0 and qtdCommonBoxesHeld <= 0:
 		return
