@@ -860,6 +860,9 @@ position = Vector2(439, 666)
 
 [node name="SpawnTimer" type="Timer" parent="Enemys"]
 wait_time = 5.0
+
+[node name="DifficultTimer" type="Timer" parent="Enemys"]
+wait_time = 5.0
 autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -1015,4 +1018,5 @@ text = "RESTART"
 [connection signal="timeout" from="Mundo/BoxSpawner/SpawnTimer" to="Mundo/BoxSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Mundo/ScoreZone/TickTimer" to="Mundo/ScoreZone" method="_on_tick_timer_timeout"]
 [connection signal="timeout" from="Enemys/SpawnTimer" to="Enemys" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Enemys/DifficultTimer" to="Enemys" method="_on_difficult_timer_timeout"]
 [connection signal="pressed" from="UI/GameOverUI/ColorRect/Restart" to="UI" method="_on_restart_pressed"]

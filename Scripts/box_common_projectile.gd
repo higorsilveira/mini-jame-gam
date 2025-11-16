@@ -15,7 +15,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Body_entered(body: Node2D) -> void:
-	# Se bater em inimigo
 	if body.is_in_group("enemy"):
 		print("atingiu um inimigod")
 		if body.has_method("take_hit"):

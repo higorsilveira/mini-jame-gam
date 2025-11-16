@@ -9,12 +9,35 @@ extends CharacterBody2D
 @onready var damage_area: Area2D = $DamageArea
 @onready var damage_shape: CollisionShape2D = $DamageArea/CollisionShape2D
 @onready var sprite: CanvasItem = $Sprite2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var active: bool = false
 var hitpoints: float = 0.0
 
+var enemyTypes : Dictionary = {
+	1: {
+		"speed": 5000.0,
+		"max_hitpoints": 5.0,
+		"damage_to_player": 3,
+		"scale": Vector2(1, 1)
+	},
+	2: {
+		"speed": 2500.0,
+		"max_hitpoints": 10.0,
+		"damage_to_player": 5,
+		"scale": Vector2(1.5, 1.5)
+	},
+	3: {
+		"speed": 10000.0,
+		"max_hitpoints": 2.0,
+		"damage_to_player": 1,
+		"scale": Vector2(0.75, 0.75)
+	}
+}
+
 
 func _ready() -> void:
+	_setup()
 	hitpoints = max_hitpoints
 	hide()
 	hitbox.set_deferred("disabled", true)
@@ -22,7 +45,35 @@ func _ready() -> void:
 
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
 
+func _setup() -> void:
+	var tipo: int = randi_range(1, 3)
+	var data: Dictionary = enemyTypes.get(tipo, {})
 
+	speed = data.get("speed", 5000.0)
+	max_hitpoints = data.get("max_hitpoints", 5.0)
+	damage_to_player = data.get("damage_to_player", 1)
+	scale = data.get("scale", Vector2.ONE)
+
+	var h: float = 1.0      
+	var s: float = _speed_to_s(speed) 
+	var v: float = 1.0
+
+	var cor: Color = Color.from_hsv(h, s, v)
+	modulate = cor
+	
+func _speed_to_s(speed: float) -> float:
+	var v_0_100: float
+
+	if speed <= 5000.0:
+		var t : float= clamp((speed - 2500.0) / (5000.0 - 2500.0), 0.0, 1.0)
+		v_0_100 = lerp(50.0, 0.0, t)
+	else:
+		var t : float = clamp((speed - 5000.0) / (10000.0 - 5000.0), 0.0, 1.0)
+		v_0_100 = lerp(0.0, 100.0, t)
+
+	return v_0_100 / 100.0
+
+	
 func _physics_process(delta: float) -> void:
 	if not active:
 		return
@@ -35,8 +86,6 @@ func _physics_process(delta: float) -> void:
 func take_hit(damage: int) -> void:
 	if not active:
 		return
-
-	print("enemy take hit")
 	hitpoints -= damage
 
 	GameController.show_damage_number(damage, global_position, false)

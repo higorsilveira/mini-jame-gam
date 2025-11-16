@@ -17,15 +17,12 @@ script = ExtResource("1_pjquw")
 texture = ExtResource("2_663o1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 25)
 shape = SubResource("CircleShape2D_ovk8a")
 
 [node name="DamageArea" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, 24)
 scale = Vector2(3.4162452, 3.4045632)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
-scale = Vector2(1.2605417, 1.2605417)
 shape = SubResource("CircleShape2D_0a874")

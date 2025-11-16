@@ -1,7 +1,7 @@
 extends Node
 
-var qtdCommonBoxesHeld: int = 0
-var qtdExplosiveBoxesHeld: int = 0
+var qtdCommonBoxesHeld: int = 99999
+var qtdExplosiveBoxesHeld: int = 99999
 var score: int = 0
 var selected_box: int = 0  # 0 = comum, 1 = explosiva
 var gameFinished := false

@@ -5,6 +5,13 @@ extends Node2D
 @onready var marker_top_left_in: Marker2D = $MarkerTopLeftIn
 @onready var marker_bot_right_in: Marker2D = $MarkerBotRightIn
 @onready var marker_bot_right_out: Marker2D = $MarkerBotRightOut
+@onready var spawn_timer: Timer = $SpawnTimer
+@onready var difficult_timer: Timer = $DifficultTimer
+
+var isFistTime := true
+var times := 0
+var qtdEnemysSpawned :int = 1
+
 
 const qtdEnemies: int = 100
 var listEnemies: Array = []
@@ -50,9 +57,32 @@ func _on_spawn_timer_timeout() -> void:
 
 	if inactive_enemies.size() <= 0:
 		return
+	
+	for i in qtdEnemysSpawned:
+		var index: int = int(randf_range(0, inactive_enemies.size() - 1))
+		var enemy = inactive_enemies[index]
+		enemy.position = rand_pos_in_spawn_area()
+		enemy.reset_enemy()
 
-	var index: int = int(randf_range(0, inactive_enemies.size() - 1))
-	var enemy = inactive_enemies[index]
 
-	enemy.position = rand_pos_in_spawn_area()
-	enemy.reset_enemy()
+func _on_difficult_timer_timeout() -> void:
+	if GameController.gameFinished :
+		return
+		
+	difficult_timer.wait_time += 1.0
+	
+	if isFistTime:
+		spawn_timer.wait_time = 5.0
+		print(spawn_timer.wait_time)
+		spawn_timer.start()
+		isFistTime = false
+		return
+
+	if times % 3 == 0:
+		qtdEnemysSpawned += 1
+		times += 1
+	else:
+		spawn_timer.wait_time -= 0.3
+		print(spawn_timer.wait_time)
+		times += 1
+		
