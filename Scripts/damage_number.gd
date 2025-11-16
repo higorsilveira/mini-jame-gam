@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var float_distance: float = 24.0
-@export var duration: float = 0.5
+@export var float_distance: float = 48.0
+@export var duration: float = 1.0
 
 @onready var label: Label = $Label
 
@@ -14,7 +14,7 @@ func setup(text: String, is_player: bool = false) -> void:
 	if is_player:
 		modulate = Color(1.0, 0.3, 0.3, 1.0)
 	else:
-		modulate = Color(1.0, 1.0, 0.3, 1.0)
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 
 func _ready() -> void:

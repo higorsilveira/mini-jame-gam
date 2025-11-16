@@ -35,6 +35,11 @@ var enemyTypes : Dictionary = {
 	}
 }
 
+var weights = {
+	1: 60,   # tipo 1 = 60%
+	2: 30,   # tipo 2 = 30%
+	3: 10    # tipo 3 = 10%
+}
 
 func _ready() -> void:
 	_setup()
@@ -47,7 +52,7 @@ func _ready() -> void:
 
 
 func _setup() -> void:
-	var tipo: int = randi_range(1, 3)
+	var tipo: int = weighted_random(enemy_weights)
 	var data: Dictionary = enemyTypes.get(tipo, {})
 
 	speed = data.get("speed", 5000.0)
@@ -61,7 +66,22 @@ func _setup() -> void:
 
 	var cor: Color = Color.from_hsv(h, s, v)
 	modulate = cor
+
 	
+func weighted_random(weights: Dictionary) -> int:
+	var total = 0
+	for v in weights.values():
+		total += v
+
+	var r = randi_range(1, total)
+	var accum = 0
+
+	for key in weights.keys():
+		accum += weights[key]
+		if r <= accum:
+			return key
+	
+	return weights.keys()[0]
 
 func _speed_to_s(speed: float) -> float:
 	var v_0_100: float
