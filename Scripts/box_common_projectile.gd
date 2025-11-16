@@ -16,7 +16,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_Body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		print("atingiu um inimigod")
 		if body.has_method("take_hit"):
 			body.call("take_hit", 1)
 		queue_free()

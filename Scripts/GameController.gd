@@ -4,8 +4,8 @@ const GAME_MUSIC: AudioStream = preload("res://Audio/Mini-Jame-Gam-Music.wav")
 
 var music_player: AudioStreamPlayer
 
-var qtdCommonBoxesHeld: int = 99999
-var qtdExplosiveBoxesHeld: int = 99999
+var qtdCommonBoxesHeld: int = 1000
+var qtdExplosiveBoxesHeld: int = 1000ss
 var score: int = 0
 var selected_box: int = 0  # 0 = comum, 1 = explosiva
 var gameFinished := false

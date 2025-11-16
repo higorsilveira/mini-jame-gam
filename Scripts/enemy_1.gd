@@ -35,10 +35,10 @@ var enemyTypes : Dictionary = {
 	}
 }
 
-var weights = {
-	1: 60,   # tipo 1 = 60%
-	2: 30,   # tipo 2 = 30%
-	3: 10    # tipo 3 = 10%
+var enemy_weights := {
+	1: 60,  # comum
+	2: 30,  # forte
+	3: 10   # rápido
 }
 
 func _ready() -> void:
@@ -97,6 +97,9 @@ func _speed_to_s(speed: float) -> float:
 
 
 func _physics_process(delta: float) -> void:
+	if GameController.gameFinished:
+		return 
+	
 	if not active:
 		return
 

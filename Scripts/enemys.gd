@@ -53,6 +53,9 @@ func rand_pos_in_spawn_area() -> Vector2:
 
 
 func _on_spawn_timer_timeout() -> void:
+	if GameController.gameFinished:
+		return 
+		
 	var inactive_enemies = listEnemies.filter(func(e): return not e.active)
 
 	if inactive_enemies.size() <= 0:

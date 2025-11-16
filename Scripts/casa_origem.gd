@@ -65,6 +65,8 @@ func spawn_random_boxes(explosive_count: int, common_count: int) -> void:
 		spawn_common_box()
 
 func _on_spawn_timer_timeout() -> void:
+	if GameController.gameFinished:
+		return 
 	var roll: float = rng.randf()
 	if roll < explosive_chance:
 		spawn_explosive_box()
