@@ -8,6 +8,10 @@ var current_hearts: int = 5
 
 
 func _process(delta: float) -> void:
+	if GameController.firstInteraction :
+		visible = false
+	elif not GameController.firstInteraction :
+		visible = true
 	current_hearts = GameController.getPlayerLife()
 	queue_redraw()
 

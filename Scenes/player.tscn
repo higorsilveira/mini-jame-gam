@@ -386,19 +386,18 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
-position = Vector2(0, -40)
+position = Vector2(0, 24)
 collision_mask = 2
 script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprit2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_wr3wg")
 animation = &"idle_right"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 40)
-scale = Vector2(1.2191069, 1.2191069)
 shape = SubResource("CircleShape2D_wowpa")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, 32)
+position = Vector2(0, -24)

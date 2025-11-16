@@ -4,12 +4,13 @@ const GAME_MUSIC: AudioStream = preload("res://Audio/Mini-Jame-Gam-Music.wav")
 
 var music_player: AudioStreamPlayer
 
-var qtdCommonBoxesHeld: int = 1000
-var qtdExplosiveBoxesHeld: int = 1000
+var qtdCommonBoxesHeld: int = 10
+var qtdExplosiveBoxesHeld: int = 10
 var score: int = 0
 var selected_box: int = 0  # 0 = comum, 1 = explosiva
 var gameFinished := false
 var playerLife := 15
+var firstInteraction := true
 
 const COMMON_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxCommonProjectile.tscn")
 const EXPLOSIVE_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxExplosiveProjectile.tscn")
@@ -17,6 +18,7 @@ const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://Scenes/DamageNumber.tscn
 
 
 func _ready() -> void:
+	gameFinished = true
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = GAME_MUSIC
 	music_player.autoplay = false
@@ -141,3 +143,8 @@ func show_damage_number(amount: int, position: Vector2, is_player: bool = false)
 
 	if n.has_method("setup"):
 		n.call("setup", str(amount), is_player)
+
+func _input(event):
+	if firstInteraction and not(event is InputEventMouseMotion):
+		gameFinished = false
+		firstInteraction = false

@@ -7,6 +7,9 @@ extends CanvasLayer
 @onready var count_score: Label = $Score/CountScore
 @onready var game_over_ui: Control = $GameOverUI
 @onready var count_score_game_over: Label = $GameOverUI/ColorRect/CountScore
+@onready var hint_to_play: Control = $Hint_to_play
+@onready var box_resource: Control = $Box_Resource
+@onready var score: Control = $Score
 
 func _ready() -> void:
 	game_over_ui.visible = false
@@ -23,8 +26,16 @@ func _process(delta: float) -> void:
 	if selectedbox == 1:
 		box_selected_comum.visible = false
 		box_selected_box.visible = true
-	if GameController.gameFinished :
+	if GameController.gameFinished and not GameController.firstInteraction:
 		game_over_ui.visible = true
+	if GameController.firstInteraction :
+		hint_to_play.visible = true
+		box_resource.visible = false
+		score.visible = false
+	elif not GameController.firstInteraction:
+		hint_to_play.visible = false
+		box_resource.visible = true
+		score.visible = true
 
 
 func _on_restart_pressed() -> void:

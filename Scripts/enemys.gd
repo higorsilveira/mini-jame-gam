@@ -13,7 +13,7 @@ var times := 0
 var qtdEnemysSpawned :int = 1
 
 
-const qtdEnemies: int = 100
+const qtdEnemies: int = 500
 var listEnemies: Array = []
 
 

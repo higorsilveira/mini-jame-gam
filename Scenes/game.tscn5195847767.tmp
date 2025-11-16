@@ -842,7 +842,7 @@ position = Vector2(0, -584)
 script = ExtResource("11_o5yvi")
 box_explosive_scene = ExtResource("5_ldgsr")
 box_common_scene = ExtResource("6_o5yvi")
-spawn_interval = 1.0
+spawn_interval = 0.5
 
 [node name="CasaOrigem" type="Sprite2D" parent="Mundo/BoxSpawner"]
 texture = ExtResource("10_rku1e")
@@ -854,7 +854,6 @@ position = Vector2(-88, 120)
 position = Vector2(88, 192)
 
 [node name="SpawnTimer" type="Timer" parent="Mundo/BoxSpawner"]
-wait_time = 3.0
 autostart = true
 
 [node name="Area2D" type="StaticBody2D" parent="Mundo/BoxSpawner"]
@@ -1060,33 +1059,39 @@ offset_right = 1100.0
 offset_bottom = 610.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.03137255, 0, 0, 0.5372549)
+color = Color(0.03, 0, 0.00049999234, 0.29411766)
 
 [node name="Score" type="Label" parent="UI/GameOverUI/ColorRect"]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 166.0
-offset_right = 451.0
-offset_bottom = 189.0
-theme_override_font_sizes/font_size = 48
+offset_left = 456.0
+offset_top = 214.0
+offset_right = 507.0
+offset_bottom = 237.0
 text = "SCORE"
+
+[node name="LabelScore" type="Label" parent="UI/GameOverUI/ColorRect"]
+modulate = Color(0.18400002, 1, 0.04000002, 1)
+layout_mode = 0
+offset_left = 424.0
+offset_top = 270.0
+offset_right = 475.0
+offset_bottom = 293.0
+text = "$$$"
 
 [node name="CountScore" type="Label" parent="UI/GameOverUI/ColorRect"]
 layout_mode = 0
-offset_left = 432.0
-offset_top = 230.0
-offset_right = 483.0
-offset_bottom = 253.0
-theme_override_font_sizes/font_size = 48
-text = "000"
+offset_left = 488.0
+offset_top = 270.0
+offset_right = 539.0
+offset_bottom = 293.0
+text = "000s"
 
 [node name="Restart" type="Button" parent="UI/GameOverUI/ColorRect"]
 layout_mode = 0
-offset_left = 368.0
-offset_top = 350.0
-offset_right = 443.0
-offset_bottom = 381.0
-theme_override_font_sizes/font_size = 48
+offset_left = 448.0
+offset_top = 318.0
+offset_right = 523.0
+offset_bottom = 349.0
 text = "RESTART"
 
 [node name="HeartsBar" type="Control" parent="UI"]

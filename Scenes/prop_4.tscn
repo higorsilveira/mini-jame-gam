@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4j3u2gicgux3"]
+
+[ext_resource type="Texture2D" uid="uid://d4khhn0xifqf" path="res://Assets/props/prop4.png" id="1_lyjhr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyjhr"]
+size = Vector2(6.99605, 7.040827)
+
+[node name="Prop1" type="Node2D"]
+use_parent_material = true
+position = Vector2(0, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, 14)
+texture = ExtResource("1_lyjhr")
+
+[node name="Area2D2" type="StaticBody2D" parent="." groups=["world"]]
+collision_layer = 18
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" groups=["world"]]
+position = Vector2(9.536743e-07, 24)
+scale = Vector2(9.148019, 6.817382)
+shape = SubResource("RectangleShape2D_lyjhr")
