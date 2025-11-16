@@ -6,9 +6,9 @@ var score: int = 0
 var selected_box: int = 0  # 0 = comum, 1 = explosiva
 var gameFinished := false
 
-# Carrega as cenas dos projéteis em tempo de compilação
 const COMMON_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxCommonProjectile.tscn")
 const EXPLOSIVE_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxExplosiveProjectile.tscn")
+const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://Scenes/DamageNumber.tscn")
 
 func restartGame() -> void:
 	qtdCommonBoxesHeld = 0
@@ -69,7 +69,6 @@ func throw_selected_box(from_position: Vector2, to_position: Vector2, direction1
 	if directionMouse == Vector2.ZERO:
 		return
 	
-	# Garante que tem munição
 	if selected_box == 0 and qtdCommonBoxesHeld <= 0:
 		return
 	if selected_box == 1 and qtdExplosiveBoxesHeld <= 0:
@@ -93,16 +92,26 @@ func throw_selected_box(from_position: Vector2, to_position: Vector2, direction1
 	if proj.has_method("set_direction"):
 		proj.call("set_direction", directionMouse.normalized())
 
-	# Desconta a caixa usada como munição
 	if selected_box == 0:
 		subCommonBoxes()
 	else:
 		subExplosivesBoxes()
 
-	# Se tiver um nó "Boxes_projectile" na cena:
 	var root: Node = get_tree().current_scene
 	var boxes_proj_node: Node = root.get_node_or_null("Boxes_projectile")
 	if boxes_proj_node:
 		boxes_proj_node.add_child(proj)
 	else:
 		root.add_child(proj)
+		
+func show_damage_number(amount: int, position: Vector2, is_player: bool = false) -> void:
+	if DAMAGE_NUMBER_SCENE == null:
+		return
+
+	var n := DAMAGE_NUMBER_SCENE.instantiate() as Node2D
+	n.global_position = position
+
+	get_tree().current_scene.add_child(n)
+
+	if n.has_method("setup"):
+		n.call("setup", str(amount), is_player)
