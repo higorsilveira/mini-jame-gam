@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 200.0
-@export var max_hitpoints: int = 5
+@export var max_hitpoints: int = 15
 @export var invincibility_time: float = 0.5
 @export var knockback_force: float = 250.0
 @export var knockback_duration: float = 0.15
@@ -80,7 +80,7 @@ func take_damage(amount: int, from_position: Vector2) -> void:
 	
 	can_take_damage = false
 	hitpoints -= amount
-	print("Player levou dano:", amount, " | HP:", hitpoints)
+	GameController.setPlayerLife(hitpoints)
 
 	GameController.show_damage_number(amount, global_position, true)
 

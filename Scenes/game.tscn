@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cvgdax1itxsb0"]
+[gd_scene load_steps=21 format=4 uid="uid://cvgdax1itxsb0"]
 
 [ext_resource type="Script" uid="uid://ca55fwmvpn2mo" path="res://Scripts/camera.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://co6cu8kmelkl4" path="res://Assets/1_Terrains_48x48.png" id="1_ebmjs"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://2fo2opex74h4" path="res://Scenes/enemy_1.tscn" id="11_1phco"]
 [ext_resource type="Script" uid="uid://ckn6aufdq22q0" path="res://Scripts/enemys.gd" id="11_nb51f"]
 [ext_resource type="Script" uid="uid://cmyvabg54a6hg" path="res://Scripts/casa_origem.gd" id="11_o5yvi"]
+[ext_resource type="Script" uid="uid://dfypla0krj3l6" path="res://Scripts/hearts_bar.gd" id="16_nnt18"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dryh"]
 texture = ExtResource("1_ebmjs")
@@ -872,12 +873,6 @@ script = ExtResource("6_i6g32")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Health" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="Box_Resource" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -1014,6 +1009,15 @@ offset_top = 318.0
 offset_right = 523.0
 offset_bottom = 349.0
 text = "RESTART"
+
+[node name="HeartsBar" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 16.0
+offset_right = 232.0
+offset_bottom = 56.0
+script = ExtResource("16_nnt18")
 
 [connection signal="timeout" from="Mundo/BoxSpawner/SpawnTimer" to="Mundo/BoxSpawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Mundo/ScoreZone/TickTimer" to="Mundo/ScoreZone" method="_on_tick_timer_timeout"]

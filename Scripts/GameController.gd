@@ -1,21 +1,45 @@
 extends Node
 
+const GAME_MUSIC: AudioStream = preload("res://Audio/Mini-Jame-Gam-Music.wav")
+
+var music_player: AudioStreamPlayer
+
 var qtdCommonBoxesHeld: int = 99999
 var qtdExplosiveBoxesHeld: int = 99999
 var score: int = 0
 var selected_box: int = 0  # 0 = comum, 1 = explosiva
 var gameFinished := false
+var playerLife := 15
 
 const COMMON_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxCommonProjectile.tscn")
 const EXPLOSIVE_BOX_PROJECTILE_SCENE: PackedScene = preload("res://Scenes/BoxExplosiveProjectile.tscn")
 const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://Scenes/DamageNumber.tscn")
 
+
+func _ready() -> void:
+	music_player = AudioStreamPlayer.new()
+	music_player.stream = GAME_MUSIC
+	add_child(music_player)
+
+	music_player.play()
+	
 func restartGame() -> void:
 	qtdCommonBoxesHeld = 0
 	qtdExplosiveBoxesHeld = 0
 	score = 0
 	selected_box = 0
 	gameFinished = false
+	playerLife = 15
+
+	if music_player:
+		music_player.stop()
+		music_player.play()
+	
+func getPlayerLife() -> int:
+	return playerLife
+	
+func setPlayerLife(amount: int) -> void:
+	playerLife = amount
 	
 func getQtdCommonBoxesHeld() -> int:
 	return qtdCommonBoxesHeld

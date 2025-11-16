@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1l18a7v0hvo3"]
+[gd_scene load_steps=3 format=3 uid="uid://b1l18a7v0hvo3"]
 
 [ext_resource type="Script" uid="uid://cd5s6o05n1ytx" path="res://Scripts/explosion_area.gd" id="1_8sa2g"]
+[ext_resource type="AudioStream" uid="uid://baw1x5bmd2r2a" path="res://Audio/Boom7.wav" id="2_5647b"]
 
 [node name="ExplosionArea" type="Node2D"]
 script = ExtResource("1_8sa2g")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="BoomPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_5647b")
+volume_db = -6.0

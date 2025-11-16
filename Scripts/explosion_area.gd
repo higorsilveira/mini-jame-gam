@@ -4,6 +4,7 @@ extends Node2D
 @export var duration: float = 0.30
 @export var visual_multiplier: float = 1.5
 
+@onready var boom: AudioStreamPlayer2D = $BoomPlayer
 @onready var timer: Timer = $Timer
 
 var elapsed: float = 0.0
@@ -23,6 +24,9 @@ func play(position: Vector2, new_radius: float) -> void:
 	show()
 	set_process(true)
 	timer.start()
+
+	if boom:
+		boom.play()
 
 
 func _process(delta: float) -> void:
