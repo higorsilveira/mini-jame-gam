@@ -8,7 +8,6 @@ extends Node2D
 @onready var timer: Timer = $Timer
 @onready var explosion_sprite: AnimatedSprite2D = $ExplosionSprite
 
-# textura base do primeiro frame da animação
 @onready var base_texture: Texture2D = (
 	explosion_sprite.sprite_frames.get_frame_texture("explosion", 0)
 )

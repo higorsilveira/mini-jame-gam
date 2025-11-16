@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://cvgdax1itxsb0"]
+[gd_scene load_steps=21 format=4 uid="uid://cvgdax1itxsb0"]
 
 [ext_resource type="Script" uid="uid://ca55fwmvpn2mo" path="res://Scripts/camera.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://co6cu8kmelkl4" path="res://Assets/1_Terrains_48x48.png" id="1_ebmjs"]
@@ -10,11 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://s276dtn2fpgs" path="res://Scenes/box_comum.tscn" id="6_o5yvi"]
 [ext_resource type="Texture2D" uid="uid://fgaafsrjkxo5" path="res://Assets/SelectesBox.png" id="9_h4fw4"]
 [ext_resource type="Script" uid="uid://c01jrnyqrj3ob" path="res://Scripts/score_zone.gd" id="9_rku1e"]
-[ext_resource type="PackedScene" uid="uid://d2nfn5u1lqnog" path="res://box_common_delivered.tscn" id="10_85qyi"]
 [ext_resource type="Texture2D" uid="uid://b5jrr5f0cd585" path="res://Assets/Casa_destino_48x48-383x1749-484x420.png" id="10_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://boxm7tm1wd4qn" path="res://Assets/Casa_origem-192x352-189x221.png" id="10_rku1e"]
 [ext_resource type="PackedScene" uid="uid://2fo2opex74h4" path="res://Scenes/enemy_1.tscn" id="11_1phco"]
-[ext_resource type="PackedScene" uid="uid://dux08f68hrlox" path="res://box_explosive_delivered.tscn" id="11_iivbl"]
 [ext_resource type="Script" uid="uid://ckn6aufdq22q0" path="res://Scripts/enemys.gd" id="11_nb51f"]
 [ext_resource type="Script" uid="uid://cmyvabg54a6hg" path="res://Scripts/casa_origem.gd" id="11_o5yvi"]
 [ext_resource type="Script" uid="uid://dfypla0krj3l6" path="res://Scripts/hearts_bar.gd" id="16_nnt18"]
@@ -821,8 +819,6 @@ shape = SubResource("RectangleShape2D_o5yvi")
 [node name="ScoreZone" type="Node2D" parent="Mundo"]
 y_sort_enabled = true
 script = ExtResource("9_rku1e")
-delivered_common_scene = ExtResource("10_85qyi")
-delivered_explosive_scene = ExtResource("11_iivbl")
 
 [node name="CasaDestino" type="Sprite2D" parent="Mundo/ScoreZone"]
 position = Vector2(-88, 432)
@@ -834,12 +830,6 @@ position = Vector2(-264, 328)
 
 [node name="BottomRight" type="Marker2D" parent="Mundo/ScoreZone"]
 position = Vector2(112, 632)
-
-[node name="TopLeftDel" type="Marker2D" parent="Mundo/ScoreZone"]
-position = Vector2(-280, 592)
-
-[node name="BottomRightDel" type="Marker2D" parent="Mundo/ScoreZone"]
-position = Vector2(80, 680)
 
 [node name="TickTimer" type="Timer" parent="Mundo/ScoreZone"]
 
