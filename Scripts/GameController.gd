@@ -19,9 +19,11 @@ const DAMAGE_NUMBER_SCENE: PackedScene = preload("res://Scenes/DamageNumber.tscn
 func _ready() -> void:
 	music_player = AudioStreamPlayer.new()
 	music_player.stream = GAME_MUSIC
+	music_player.autoplay = false
 	add_child(music_player)
 
 	music_player.play()
+
 	
 func restartGame() -> void:
 	qtdCommonBoxesHeld = 0
